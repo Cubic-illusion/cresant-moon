@@ -13,12 +13,11 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #000; /* Darker background */
+            background: #000; 
             overflow-x: hidden;
             height: 100vh;
         }
 
-        /* Container for horizontal scrolling */
         .page-container {
             display: flex;
             width: 200vw;
@@ -35,7 +34,6 @@
             justify-content: center;
         }
 
-        /* Stars Background */
         .stars {
             position: absolute;
             width: 100%;
@@ -72,7 +70,6 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* Clouds */
         .clouds {
             position: absolute;
             width: 100%;
@@ -121,7 +118,6 @@
             }
         }
 
-        /* Moon Display */
         .moon-display {
             position: absolute;
             top: 50%;
@@ -171,17 +167,13 @@
             background: #000;
         }
 
-        /* First Quarter: Right half lit */
         .moon-shadow.first-quarter {
-            background: linear-gradient(90deg, #000 50%, transparent 50%);
+            background: linear-gradient(90deg, #000000 50%, transparent 50%);
         }
 
-        /* Last Quarter: Left half lit */
         .moon-shadow.last-quarter {
-            background: linear-gradient(90deg, transparent 50%, #210e0e 50%);
+            background: linear-gradient(90deg, transparent 50%, #00000000 50%);
         }
-
-        /* Waxing Crescent: Shadow circle positioned to create right crescent */
         .moon-shadow.waxing-crescent::before {
             content: '';
             position: absolute;
@@ -193,7 +185,6 @@
             top: 0;
         }
 
-        /* Waxing Gibbous: Black overlay with transparent moon-sized hole, positioned to show gibbous */
        .moon-shadow.waxing-gibbous::before {
             content: '';
             position: fixed;
@@ -207,7 +198,6 @@
             -webkit-mask: radial-gradient(circle 300px at calc(50vw + 150px) 50vh, transparent 300px, black 301px);
         }
 
-        /* Waning Gibbous: Shadow circle positioned to create large left illumination */
         .moon-shadow.waning-gibbous::before {
             content: '';
             position: fixed;
@@ -221,7 +211,7 @@
             -webkit-mask: radial-gradient(circle 300px at calc(50vw + 150px) 50vh, transparent 300px, black 301px);
         }
 
-        /* Waning Crescent: Shadow circle positioned to create left crescent */
+
         .moon-shadow.waning-crescent::before {
             content: '';
             position: absolute;
@@ -233,7 +223,6 @@
             top: 0;
         }
 
-        /* Welcome Screen Content */
         .welcome-content {
             text-align: center;
             color: white;
@@ -297,7 +286,6 @@
             box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
         }
 
-        /* Name Input Screen */
         .name-input-content {
             text-align: center;
             color: white;
@@ -403,7 +391,6 @@
             opacity: 1;
         }
 
-        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -414,8 +401,6 @@
                 transform: translateY(0);
             }
         }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .welcome-title {
                 font-size: 2.5rem;
@@ -449,15 +434,12 @@
 </head>
 <body>
     <div class="page-container" id="pageContainer">
-        <!-- Welcome Screen -->
         <div class="screen" id="welcomeScreen">
-            <!-- Stars -->
+
             <div class="stars" id="starsContainer"></div>
             
-            <!-- Clouds -->
             <div class="clouds" id="cloudsContainer1"></div>
             
-            <!-- Welcome Content -->
             <div class="welcome-content">
                 <h1 class="welcome-title">Welcome to the Stars</h1>
                 <p class="welcome-subtitle">Please enter a date to discover the moon phase</p>
@@ -467,21 +449,17 @@
             </div>
         </div>
         
-        <!-- Date Input Screen -->
         <div class="screen" id="dateScreen">
-            <!-- Stars -->
+
             <div class="stars" id="starsContainer2"></div>
             
-            <!-- Clouds -->
             <div class="clouds" id="cloudsContainer2"></div>
-            
-            <!-- Realistic Moon Visual -->
+
             <div class="moon-display" id="moonDisplay">
                 <img class="moon-img" src="FullMoon2010.png" alt="Moon">
                 <div class="moon-shadow full-moon" id="moonShadow"></div>
             </div>
             
-            <!-- Date Input Content -->
             <div class="name-input-content" id="moonPhaseContent" style="position:relative; background:none; box-shadow:none;">
                 <h2 class="input-title" style="position:relative;z-index:1;">What Date?</h2>
                 <p class="input-subtitle" style="position:relative;z-index:1;">Let the stars show you the moon's phase</p>
@@ -501,50 +479,38 @@
     </div>
 
     <script>
-        // Create clouds with random properties
         function createClouds() {
             const containers = ['cloudsContainer1', 'cloudsContainer2'];
             
             containers.forEach(containerId => {
                 const container = document.getElementById(containerId);
-                const cloudCount = 16; // Number of clouds per screen
+                const cloudCount = 16;
                 
                 for (let i = 0; i < cloudCount; i++) {
                     const cloud = document.createElement('div');
                     cloud.className = 'cloud';
-                    
-                    // Random dimensions
-                    const baseWidth = Math.random() * 80 + 60; // 60-140px
-                    const baseHeight = Math.random() * 25 + 25; // 25-50px
+                    const baseWidth = Math.random() * 80 + 60; 
+                    const baseHeight = Math.random() * 25 + 25; 
                     cloud.style.width = baseWidth + 'px';
                     cloud.style.height = baseHeight + 'px';
                     
-                    // Random position (top or bottom half)
                     const isTop = Math.random() > 0.5;
                     if (isTop) {
-                        cloud.style.top = Math.random() * 30 + '%'; // Top 30%
+                        cloud.style.top = Math.random() * 30 + '%'; 
                     } else {
-                        cloud.style.bottom = Math.random() * 30 + '%'; // Bottom 30%
+                        cloud.style.bottom = Math.random() * 30 + '%';
                     }
                     
-                    // Start from left edge
                     cloud.style.left = '-200px';
-                    
-                    // Random animation duration (speed)
-                    const duration = Math.random() * 30 + 20; // 20-50 seconds
+
+                    const duration = Math.random() * 30 + 20;
                     cloud.style.animationDuration = duration + 's';
-                    
-                    // Random animation delay
-                    const delay = Math.random() * 20; // 0-20 seconds
+                    const delay = Math.random() * 20;
                     cloud.style.animationDelay = '-' + delay + 's';
-                    
-                    // Create pseudo-elements for cloud shape with random sizes
-                    const beforeWidth = Math.random() * 30 + 30; // 30-60px
-                    const beforeHeight = Math.random() * 30 + 30; // 30-60px
-                    const afterWidth = Math.random() * 40 + 40; // 40-80px
-                    const afterHeight = Math.random() * 25 + 25; // 25-50px
-                    
-                    // Apply styles using CSS custom properties
+                    const beforeWidth = Math.random() * 30 + 30;
+                    const beforeHeight = Math.random() * 30 + 30; 
+                    const afterWidth = Math.random() * 40 + 40; 
+                    const afterHeight = Math.random() * 25 + 25; 
                     cloud.style.setProperty('--before-width', beforeWidth + 'px');
                     cloud.style.setProperty('--before-height', beforeHeight + 'px');
                     cloud.style.setProperty('--before-top', '-' + (beforeHeight * 0.5) + 'px');
@@ -569,17 +535,11 @@
                 for (let i = 0; i < starCount; i++) {
                     const star = document.createElement('div');
                     star.className = 'star';
-                    
-                    // Random size
                     const sizes = ['small', 'medium', 'large'];
                     const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
                     star.classList.add(randomSize);
-                    
-                    // Random position
                     star.style.left = Math.random() * 100 + '%';
                     star.style.top = Math.random() * 100 + '%';
-                    
-                    // Random animation delay
                     star.style.animationDelay = Math.random() * 3 + 's';
                     
                     container.appendChild(star);
@@ -587,30 +547,23 @@
             });
         }
 
-        // Scroll to date input screen
         function scrollToDateInput() {
             const container = document.getElementById('pageContainer');
             container.style.transform = 'translateX(-100vw)';
-            // Initialize moon display
             updateMoonPhase();
         }
 
-        // Scroll back to welcome screen
         function scrollToWelcome() {
             const container = document.getElementById('pageContainer');
             container.style.transform = 'translateX(0)';
-            // Clear result and input
             document.getElementById('dateInput').value = '';
             document.getElementById('moonPhaseResult').classList.remove('show');
             document.getElementById('moonPhaseResult').textContent = '';
-            // Reset moon to full moon
             const moonShadow = document.getElementById('moonShadow');
             moonShadow.className = 'moon-shadow full-moon';
         }
 
-        // Moon phase calculation and display
         function getMoonPhase(date) {
-            // Algorithm based on astronomical calculations
             const phases = [
                 { name: "New Moon", emoji: "🌑", shadowClass: "new-moon" },
                 { name: "Waxing Crescent", emoji: "🌒", shadowClass: "waxing-crescent" },
@@ -622,7 +575,6 @@
                 { name: "Waning Crescent", emoji: "🌘", shadowClass: "waning-crescent" }
             ];
             
-            // Conway's algorithm for moon phase calculation
             let year = date.getFullYear();
             let month = date.getMonth() + 1;
             let day = date.getDate();
@@ -645,7 +597,6 @@
             return phases[index];
         }
 
-        // Update moon visual display and shadow
         function updateMoonPhase() {
             const dateInput = document.getElementById('dateInput');
             let phase = { name: "Full Moon", emoji: "🌕", shadowClass: "full-moon" };
@@ -655,13 +606,12 @@
                     phase = getMoonPhase(date);
                 }
             }
-            // Set moon shadow class
+
             const moonShadow = document.getElementById('moonShadow');
             moonShadow.className = 'moon-shadow ' + phase.shadowClass;
             return phase;
         }
 
-        // Submit date
         function submitDate() {
             const dateInput = document.getElementById('dateInput');
             const result = document.getElementById('moonPhaseResult');
@@ -680,29 +630,22 @@
             result.classList.add('show');
         }
 
-        // Handle Enter key in date input
         document.getElementById('dateInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 submitDate();
             }
         });
 
-        // Update moon phase as user changes date
         document.getElementById('dateInput').addEventListener('input', function() {
             updateMoonPhase();
-            // Clear previous result
             const result = document.getElementById('moonPhaseResult');
             result.classList.remove('show');
         });
-
-        // Initialize everything when page loads
         window.addEventListener('load', function() {
             createClouds();
             createStars();
             updateMoonPhase();
         });
-
-        // Add interactive star movement
         document.addEventListener('mousemove', function(e) {
             const stars = document.querySelectorAll('.star');
             const mouseX = e.clientX / window.innerWidth;
@@ -719,5 +662,4 @@
         });
     </script>
 </body>
-
 </html>
